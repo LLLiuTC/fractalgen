@@ -1,0 +1,5 @@
+*.pyc
+*.png
+
+pretrained_models/*
+output_dir/*

@@ -380,6 +380,7 @@ class AR(nn.Module):
                                                  self.config.rope_base, 1)
 
     def patchify(self, x):
+        # ViT
         bsz, c, h, w = x.shape
         p = self.patch_size
         h_, w_ = h // p, w // p
@@ -437,7 +438,7 @@ class AR(nn.Module):
     def forward(self, imgs, cond_list):
         """ training """
         # patchify to get gt
-        patches = self.patchify(imgs)
+        patches = self.patchify(imgs)   # imgs: [bs, 3, 64, 64]
         mask = torch.ones(patches.size(0), patches.size(1)).to(patches.device)
 
         # get condition for next level

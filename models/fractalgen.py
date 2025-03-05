@@ -37,6 +37,7 @@ class FractalGen(nn.Module):
         # Class embedding for the first fractal level
         if self.fractal_level == 0:
             self.num_classes = class_num
+            self.embed_dim_list = embed_dim_list
             self.class_emb = nn.Embedding(class_num, embed_dim_list[0])
             self.label_drop_prob = label_drop_prob
             self.fake_latent = nn.Parameter(torch.zeros(1, embed_dim_list[0]))
@@ -118,7 +119,7 @@ class FractalGen(nn.Module):
         return loss + guiding_pixel_loss
 
     def sample(self, cond_list, num_iter_list, cfg, cfg_schedule, temperature, filter_threshold, fractal_level,
-               visualize=False):
+               visualize=True):
         """
         Generate samples recursively.
         """
